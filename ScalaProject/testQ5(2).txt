@@ -1,0 +1,7 @@
+q:Est-ce qu'il a des ailes ?
+q:Est-ce qu'il a des plumes ?
+q:Est-ce qu'il a un goitre ?
+Pelican
+Pigeon
+Chauve-souris
+Chien
