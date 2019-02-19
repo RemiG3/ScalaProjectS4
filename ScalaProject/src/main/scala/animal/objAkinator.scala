@@ -187,18 +187,7 @@ object objAkinator {
   
   /* Question 5 */
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  /* Test pour la question 5 */
-  
-  /*def prefixe(s : String, n : Int) : String = {
+ def prefixe(s : String, n : Int) : String = {
     if(n > 1) prefixe(s, n-1)+s(n-1).toString() else s(0).toString
   }
   
@@ -206,26 +195,36 @@ object objAkinator {
     if(n < s.length-1) s(n).toString()+suffixe(s, n+1) else s(s.length-1).toString
   }
   
+  def brancheDroite(l : List[String], nQ : Int, nA : Int) : List[String] = l match{
+    case t::q if(nQ+1 == nA) => l
+    case t::q if(prefixe(t, 2) == "q:") => brancheDroite(q, nQ+1, nA)
+    case t::q => brancheDroite(q, nQ, nA+1)
+  }
+  
   def fichierToABanimal(nomf : String) : ABanimal = {
-    val l = scala.io.Source.fromFile(nomf).getLines.toList
-    
     def auxFichierToAnimal(list : List[String], filsDroit : Boolean) : ABanimal = list match{
-      case t::Nil => Animal(t)
-      case t::t1::t2::q if((prefixe(t, 2) == "q:") && ((l.indexOf(t) > l.length/2) && (filsDroit)) || ((l.indexOf(t) < l.length/2) && (!filsDroit))) => Question(suffixe(t, 2), auxFichierToAnimal(t1::t2::q, false), auxFichierToAnimal(q, true))
-      case t::q if(((l.indexOf(t) > l.length/2) && (filsDroit)) || ((l.indexOf(t) < l.length/2) && (!filsDroit))) => println(t + " : " + (((l.indexOf(t) > l.length/2) && (filsDroit)) || ((l.indexOf(t) < l.length/2) && (!filsDroit)))); Animal(t);
-      case t::q => auxFichierToAnimal(q, filsDroit);
+      case t::q if(prefixe(t, 2) == "q:") => Question(suffixe(t, 2), auxFichierToAnimal(q, false), auxFichierToAnimal(brancheDroite(q, 0, 0), true))
+      case t::q => Animal(t)
     }
     
+    val l = scala.io.Source.fromFile(nomf).getLines.toList
     auxFichierToAnimal(l, false)
-  }*/
+  }
   
   
-  /*
-    if((prefixe(t1, 2) != "q:") && (prefixe(t2, 2) == "q:")) Question(suffixe(t, 2), Animal(t1), auxFichierToAnimal(t1::t2::q, true))
-       else if((prefixe(t1, 2) == "q:") && (prefixe(t2, 2) != "q:")) Question(suffixe(t, 2), auxFichierToAnimal(t1::t2::q, true), Animal(t2))
-       else if((prefixe(t1, 2) != "q:") && (prefixe(t2, 2) != "q:")) Question(suffixe(t, 2), Animal(t1), Animal(t2))
-       else Question(suffixe(t, 2), auxFichierToAnimal(t1::t2::q, true), auxFichierToAnimal(q, true))
-   */
+  /* Question 6 */
+  
+  def ABanimalToFichier(nomf : String, a : ABanimal) : Unit = {
+    
+    def auxABanimalToFichier(file : FileWriter, ab : ABanimal) : Unit = ab match{
+      case Animal(an) => file.write(an.toString() + "\r\n")
+      case Question(q, bO, bN) => file.write("q:" + q.toString() + "\r\n"); auxABanimalToFichier(file, bO); auxABanimalToFichier(file, bN)
+    }
+    
+    val writer = new FileWriter(new File(nomf));
+    auxABanimalToFichier(writer, a)
+    writer.close()
+  }
   
   
   
@@ -233,8 +232,9 @@ object objAkinator {
   def main(args: Array[String]){
     //jeuSimple(a, Source.stdin.getLines)
     //println(jeuLog(a, Source.stdin.getLines))
-    println(jeuApprentissage(a1, Source.stdin.getLines))
-    //println(fichierToABanimal("testQ5.txt"))
+    //println(jeuApprentissage(a1, Source.stdin.getLines))
+    ABanimalToFichier("testCreate.txt", a)
+    println(fichierToABanimal("testCreate.txt"))
   }
   
   
