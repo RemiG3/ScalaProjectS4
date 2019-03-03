@@ -227,14 +227,34 @@ object objAkinator {
   }
   
   
+  /* Question 7 */
+  
+  
+  
+  /* Question 8 */
+  
+  def interfaceTextuelle() : Unit = {
+    println("Vous jouez en mode apprentissage.")
+    val ab = fichierToABanimal("default.txt")
+    val newAb = jeuApprentissage(ab, Source.stdin.getLines)
+    ABanimalToFichier("default.txt", newAb)
+    
+    println("Voulez-vous rejouer ? ")
+    
+    if(Source.stdin.getLines.next() == "o")
+      interfaceTextuelle()
+      
+  }
   
   
   def main(args: Array[String]){
     //jeuSimple(a, Source.stdin.getLines)
     //println(jeuLog(a, Source.stdin.getLines))
     //println(jeuApprentissage(a1, Source.stdin.getLines))
-    ABanimalToFichier("testCreate.txt", a)
-    println(fichierToABanimal("testCreate.txt"))
+    //ABanimalToFichier("default.txt", a)
+    //println(fichierToABanimal("default.txt"))
+    println("Bienvenue sur Akinator des animaux !")
+    interfaceTextuelle()
   }
   
   
