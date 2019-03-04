@@ -31,12 +31,6 @@ class TestCorrigeuxGauchotte extends FunSuite{
     assert(jeuApprentissage(a, Iterator("n","n","o")) === a)
   }
   
-
-  test("jeuSimpleJNSP"){
-    assert(jeuSimpleJNSP(a,Iterator("x","x","x","n","n","n","n","o","o"),Nil))  
-  }
-  
-
   test("fichierToABanimal"){
     
     // Dans les cas normaux
@@ -54,6 +48,8 @@ class TestCorrigeuxGauchotte extends FunSuite{
   }
   
   test("fichierToABanimal et ABanimalToFichier"){
-    
+    // Test des 2 fonctions à la fois
+    ABanimalToFichier("test_enregistrement.txt",test)
+    assert(fichierToABanimal("test_enregistrement.txt") == test)
   }
 }
