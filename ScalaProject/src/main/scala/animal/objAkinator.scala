@@ -285,11 +285,11 @@ object objAkinator {
     //jeuSimple(a, Source.stdin.getLines)
     //println(jeuLog(a, Source.stdin.getLines))
     //println(jeuApprentissage(a1, Source.stdin.getLines))
-    //ABanimalToFichier("default.txt", a)
+    ABanimalToFichier("test.txt", a)
     //println(fichierToABanimal("default.txt"))
     println("Bienvenue sur Akinator des animaux !")
     //interfaceTextuelle()
-    jeuSimpleJNSP(a, Source.stdin.getLines,Nil)
+    //jeuSimpleJNSP(a, Source.stdin.getLines,Nil)
 
 
   }
