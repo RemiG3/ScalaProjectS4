@@ -132,9 +132,9 @@ object objAkinator {
                             val repQ = it.next();
                             
                             if(repQ == "o")
-                              Question(s, Animal(abO), Question(q, Animal(res), Animal(abO.toString())))
+                              Question(s, Question(q, Animal(res), Animal(abO.toString())),question)
                             else
-                              Question(s, Animal(abO), Question(q, Animal(abO.toString()), Animal(res)))
+                              Question(s, Question(q, Animal(abO.toString()), Animal(res)), question )
                             
                           }
 
@@ -162,9 +162,9 @@ object objAkinator {
                             val repQ = it.next();
                             
                             if(repQ == "o")
-                              Question(s, Question(q, Animal(res), Animal(abN.toString())), Animal(abN))
+                              Question(s,question, Question(q, Animal(res), Animal(abN.toString())) )
                             else
-                              Question(s, Question(q, Animal(abN.toString()), Animal(res)), Animal(abN))
+                              Question(s, question, Question(q, Animal(abN.toString()), Animal(res)))
                             
                           }
 
@@ -303,10 +303,12 @@ object objAkinator {
     //jeuSimple(a, Source.stdin.getLines)
     //println(jeuLog(a, Source.stdin.getLines))
     //println(jeuApprentissage(a1, Source.stdin.getLines))
-    //ABanimalToFichier("default.txt", a)
+    //ABanimalToFichier("test.txt", a)
     //println(fichierToABanimal("default.txt"))
     println("Bienvenue sur Akinator des animaux !")
+
     interfaceTextuelle()
+
     //jeuSimpleJNSP(a, Source.stdin.getLines,Nil)
 
 
