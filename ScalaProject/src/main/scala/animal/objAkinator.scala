@@ -229,7 +229,36 @@ object objAkinator {
   
   /* Question 7 */
   
-  
+    def jeuSimpleJNSP(a:ABanimal, it:Iterator[String]) : Boolean = a match{
+    	val arbreRestants = Nil
+    	case Question(s,o,n) => {
+    		println(s)
+    		if(it.next() == "o"){
+    			jeuSimpleJNSP(o,it)
+    		} else if(it.next() == "n"){
+    			jeuSimpleJNSP(n,it)
+    		} else{
+    			val arbreRestants = n::Nil
+    if(!jeuSimple(o,it)){
+    jeuSimple(n,it)
+    else
+    true	
+    		}
+    	case Animal(ab) => {
+    		println("Pensez-vous à : " + ab)
+    		if(it.next() == "o"){
+    			println("J’ai gagné !")
+    			true
+    		}else{
+    			if(arbreRestants == Nil){
+    				println("J’ai perdu !")
+    				false
+    			}else{
+    				false
+    		}
+    }
+  }
+
   
   /* Question 8 */
   

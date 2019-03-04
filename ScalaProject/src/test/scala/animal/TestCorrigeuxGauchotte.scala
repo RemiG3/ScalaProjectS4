@@ -19,4 +19,9 @@ class TestCorrigeuxGauchotte extends FunSuite{
   test("JeuLog"){
     assert(jeuLog(a, Iterator("n","n","o")) === List("n","n","o"))
   }
+  
+  /*test("jeuApprentissage"){
+    assert()
+  }*/
+  
 }
