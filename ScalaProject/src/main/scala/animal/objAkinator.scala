@@ -229,7 +229,7 @@ object objAkinator {
   
   /* Question 7 */
   
-    def jeuSimpleJNSP(a:ABanimal, it:Iterator[String]) : Boolean = a match{
+    /*def jeuSimpleJNSP(a:ABanimal, it:Iterator[String]) : Boolean = a match{
     	val arbreRestants = Nil
     	case Question(s,o,n) => {
     		println(s)
@@ -257,7 +257,7 @@ object objAkinator {
     				false
     		}
     }
-  }
+  }*/
 
   
   /* Question 8 */
@@ -282,8 +282,10 @@ object objAkinator {
     //println(jeuApprentissage(a1, Source.stdin.getLines))
     //ABanimalToFichier("default.txt", a)
     //println(fichierToABanimal("default.txt"))
-    println("Bienvenue sur Akinator des animaux !")
-    interfaceTextuelle()
+    
+    //println(jeuApprentissage(a, Iterator("n","n","n","Cheval","Est-ce qu'il a un crinière ?", "o")))
+    //println("Bienvenue sur Akinator des animaux !")
+    //interfaceTextuelle()
   }
   
   

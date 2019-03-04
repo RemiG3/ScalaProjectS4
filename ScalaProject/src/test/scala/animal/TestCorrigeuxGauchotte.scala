@@ -20,8 +20,16 @@ class TestCorrigeuxGauchotte extends FunSuite{
     assert(jeuLog(a, Iterator("n","n","o")) === List("n","n","o"))
   }
   
-  /*test("jeuApprentissage"){
+  test("jeuApprentissage"){
+    val test = Question("Est-ce qu'il a des ailes ?",Question("Est-ce qu'il a des plumes ?",Question("Est-ce qu'il a un goitre ?",Animal("Pélican"),Animal("Pigeon")),Question("Est-ce qu'il a des poils ?",Animal("Chauve-souris"),Animal("Ptérodactyle"))),Question("Est-ce qu'il ronronne ?",Animal("Chat"),Question("Est-ce qu'il a un crinière ?",Animal("Cheval"),Animal("Chien"))))
+    
+    // Test avec ajout d'un animal :
+    assert(jeuApprentissage(a, Iterator("n","n","n","Cheval","Est-ce qu'il a un crinière ?", "o")) === test)
+    // Test sans ajout d'animal :
+    assert(jeuApprentissage(a, Iterator("n","n","o")) === a)
+  }
+  
+  /*test("fichierToABanimal"){
     assert()
   }*/
-  
 }
