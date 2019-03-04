@@ -229,35 +229,37 @@ object objAkinator {
   
   /* Question 7 */
   
-    def jeuSimpleJNSP(a:ABanimal, it:Iterator[String]) : Boolean = a match{
-    	val arbreRestants = Nil
+    def jeuSimpleJNSP(a:ABanimal, it:Iterator[String],arbresRestant : List[ABanimal]) : Boolean = a match{
     	case Question(s,o,n) => {
     		println(s)
-    		if(it.next() == "o"){
-    			jeuSimpleJNSP(o,it)
-    		} else if(it.next() == "n"){
-    			jeuSimpleJNSP(n,it)
+    		val rep = it.next()
+    		if(rep == "o"){
+    			jeuSimpleJNSP(o,it,arbresRestant)
+    		} else if(rep == "n"){
+    			jeuSimpleJNSP(n,it,arbresRestant)
     		} else{
-    			val arbreRestants = n::Nil
-    if(!jeuSimple(o,it)){
-    jeuSimple(n,it)
-    else
-    true	
+    		  val resO = jeuSimpleJNSP(o,it,n::arbresRestant)
+          if(!resO)
+            jeuSimpleJNSP(n,it,arbresRestant)
+          else
+            true	
     		}
+    	}
     	case Animal(ab) => {
     		println("Pensez-vous à : " + ab)
     		if(it.next() == "o"){
     			println("J’ai gagné !")
     			true
     		}else{
-    			if(arbreRestants == Nil){
+    			if(arbresRestant == Nil){
     				println("J’ai perdu !")
     				false
     			}else{
     				false
     		}
+       }
+    	}
     }
-  }
 
   
   /* Question 8 */
@@ -283,7 +285,8 @@ object objAkinator {
     //ABanimalToFichier("default.txt", a)
     //println(fichierToABanimal("default.txt"))
     println("Bienvenue sur Akinator des animaux !")
-    interfaceTextuelle()
+    //interfaceTextuelle()
+    jeuSimpleJNSP(a, Source.stdin.getLines,Nil)
   }
   
   
