@@ -147,7 +147,7 @@ object objAkinator {
     case Question(s, question, Animal(abN)) => {
                         
                         println(s)
-                        if (it.next() == "o"){
+                        if (it.next() == "n"){
                           println("Pensez-vous à : " + abN)
                         
                           if(it.next() == "o"){
@@ -268,16 +268,34 @@ object objAkinator {
   /* Question 8 */
   
   def interfaceTextuelle() : Unit = {
-    println("Vous jouez en mode apprentissage.")
+    
+    
     val ab = fichierToABanimal("default.txt")
-    val newAb = jeuApprentissage(ab, Source.stdin.getLines)
-    ABanimalToFichier("default.txt", newAb)
+    
+    
+    println("Choisissez parmi les modes suivants :")
+    println("Tapez 1 pour le mode Simple.")
+    println("Tapez 2 pour le mode Apprentissage.")
+    println("Tapez 3 si vous ne savez pas.")
+    println("Tapez 4 pour le mode Log ( si vous savez ce que c'est (en vrai il sert à rien)).")
+    
+    val rep = Source.stdin.getLines.next
+    
+    rep match{
+      case "1"  => jeuSimple(ab,Source.stdin.getLines)
+      case "2"  => {
+        val newAb = jeuApprentissage(ab, Source.stdin.getLines)
+        println(newAb)
+        ABanimalToFichier("default.txt", newAb)
+      }
+      case "3"  => jeuSimpleJNSP(ab,Source.stdin.getLines,Nil)
+      case "4"  => println(jeuLog(ab,Source.stdin.getLines))
+    }
     
     println("Voulez-vous rejouer ? ")
     
     if(Source.stdin.getLines.next() == "o")
-      interfaceTextuelle()
-      
+      interfaceTextuelle()      
   }
   
   
@@ -288,8 +306,8 @@ object objAkinator {
     //ABanimalToFichier("default.txt", a)
     //println(fichierToABanimal("default.txt"))
     println("Bienvenue sur Akinator des animaux !")
-    //interfaceTextuelle()
-    jeuSimpleJNSP(a, Source.stdin.getLines,Nil)
+    interfaceTextuelle()
+    //jeuSimpleJNSP(a, Source.stdin.getLines,Nil)
 
 
   }

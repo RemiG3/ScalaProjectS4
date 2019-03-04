@@ -3,6 +3,8 @@ q:Est-ce qu'il a des plumes ?
 q:Est-ce qu'il a un goitre ?
 Pélican
 q:Est-ce un animal aquatique ?
+q:Vit-il dans un climat polaire ?
+Pingouin
 Canard
 Pigeon
 q:Est-ce qu'il a des poils ?
@@ -11,11 +13,7 @@ q:Est-ce un insecte ?
 Sauterelle
 Ptérodactyle
 q:Est-ce qu'il ronronne ?
+q:Est-ce qu'il est domestiqué ?
 Chat
-q:Est-ce qu'il a une crinière ?
-Cheval
-q:Est-ce un insecte ?
-Fourmi
-q:Est-ce un animal sauvage ?
-chevreuil
+Lion
 Chien
