@@ -229,6 +229,7 @@ object objAkinator {
   
   /* Question 7 */
   
+
     def jeuSimpleJNSP(a:ABanimal, it:Iterator[String],arbresRestant : List[ABanimal]) : Boolean = a match{
     	case Question(s,o,n) => {
     		println(s)
@@ -262,6 +263,8 @@ object objAkinator {
     }
 
   
+
+  
   /* Question 8 */
   
   def interfaceTextuelle() : Unit = {
@@ -287,6 +290,8 @@ object objAkinator {
     println("Bienvenue sur Akinator des animaux !")
     //interfaceTextuelle()
     jeuSimpleJNSP(a, Source.stdin.getLines,Nil)
+
+
   }
   
   
