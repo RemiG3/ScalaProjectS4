@@ -301,7 +301,7 @@ object objAkinator {
   
   def interfaceTextuelle() : Unit = {
     
-    val ab = fichierToABanimal("default1.txt")
+    val ab = fichierToABanimal("default.txt")
     
     println("Choisissez parmi les modes suivants :")
     println("- Tapez 1 pour le mode Simple.")
