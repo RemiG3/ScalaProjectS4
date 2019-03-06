@@ -315,15 +315,28 @@ object objAkinator {
     val rep = Source.stdin.getLines.next
     
     rep match{
-      case "1"  => jeuSimple(ab,Source.stdin.getLines)
+      case "1"  => {
+        println("Vous jouez en mode Simple.")
+        jeuSimple(ab,Source.stdin.getLines)
+      }
       case "2"  => {
+        println("Vous jouez en mode Apprentissage.")
         val newAb = jeuApprentissage(ab, Source.stdin.getLines)
         println(newAb)
         ABanimalToFichier("default.txt", newAb)
       }
-      case "3"  => jeuSimpleJNSP(ab,Source.stdin.getLines,Nil)
-      case "4"  => println(jeuLog(ab,Source.stdin.getLines))
-      case _ => jeuSimple(ab,Source.stdin.getLines)
+      case "3"  => {
+        println("Vous jouez en mode SimpleJeNeSaisPas.")
+        jeuSimpleJNSP(ab,Source.stdin.getLines,Nil)
+      }
+      case "4"  => {
+        println("Vous jouez en mode SimpleJeNeSaisPas.")
+        println("Vos réponses : " + jeuLog(ab,Source.stdin.getLines))
+      }
+      case _ => {
+        println("Vous jouez en mode Simple.")
+        jeuSimple(ab,Source.stdin.getLines)
+      }
     }
     
     println("Voulez-vous rejouer ? ")
@@ -334,24 +347,19 @@ object objAkinator {
   
   
   def main(args: Array[String]){
-    //jeuSimple(a, Source.stdin.getLines)
-    //println(jeuLog(a, Source.stdin.getLines))
-    //println(jeuApprentissage(a1, Source.stdin.getLines))
-    //ABanimalToFichier("test.txt", a)
-    //println(fichierToABanimal("default.txt"))
+    
     println("Bienvenue sur Akinator des animaux !")
-    println()
+    println
     println("Pour répondre aux différentes questions :")
     println("   - Tapez o pour répondre oui")
     println("   - Tapez n pour répondre non")
-    println()
+    println
     
     try{
       interfaceTextuelle()
     }catch{
-      case e : Exception => println("Exception : " + e);
+      case e : Exception => println("Erreur : " + e.getMessage);
     }
-    //jeuSimpleJNSP(a, Source.stdin.getLines,Nil)
 
 
   }

@@ -1,0 +1,13 @@
+q:Est-ce qu'il a des ailes ?
+q:Est-ce qu'il a des plumes ?
+q:Est-ce qu'il a un goitre ?
+Pélican
+Pigeon
+q:Est-ce qu'il a des poils ?
+Chauve-souris
+q:Est-ce un reptile ?
+Ptérodactyle
+Exocet
+q:Est-ce qu'il ronronne ?
+Chat
+Chien
