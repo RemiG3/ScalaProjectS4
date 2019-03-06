@@ -33,20 +33,26 @@ object objAkinator {
   def jeuSimple(a : ABanimal, it : Iterator[String]) : Boolean = a match{
     case Question(s, o, n) => {
                               println(s)
-                                if(it.next() == "o"){
+                                val rep = it.next()
+                                if(rep == "o"){
                                   jeuSimple(o, it)
-                                } else{
+                                } else if (rep == "n"){
                                   jeuSimple(n, it)
+                                }else{
+                                  throw new Exception("Réponse non valide")
                                 }
                               } 
     case Animal(ab) => {
                         println("Pensez-vous à : " + ab)
-                          if(it.next() == "o"){
+                        val rep = it.next()
+                          if(rep == "o"){
                             println("J'ai gagné !")
                             true
-                          } else{
+                          } else if(rep == "n"){
                             println("J'ai perdu !")
                             false
+                          }else{
+                            throw new Exception("Réponse non valide")
                           }
                         }
   }
@@ -56,21 +62,27 @@ object objAkinator {
   
   def jeuLog(a : ABanimal, it : Iterator[String]):List[String] = a match{
     case Question(s, o, n) => {
-                              println(s)
-                                if(it.next() == "o"){
-                                  "o"::jeuLog(o, it)
-                                } else{
-                                  "n"::jeuLog(n, it)
-                                }
+                               println(s)
+                               val rep = it.next()  
+                               if(rep == "o"){
+                                 "o"::jeuLog(o, it)
+                               } else if (rep == "n"){
+                                 "n"::jeuLog(n, it)
+                               } else {
+                                 throw new Exception("Réponse non valide")
+                               }
                               } 
     case Animal(ab) => {
                         println("Pensez-vous à : " + ab)
-                          if(it.next() == "o"){
+                        val rep = it.next()
+                          if(rep == "o"){
                             println("J'ai gagné !")
                             "o"::Nil
-                          } else{
+                          } else if (rep == "n"){
                             println("J'ai perdu !")
                             "n"::Nil
+                          } else {
+                            throw new Exception("Réponse non valide")
                           }
                         }
   }
@@ -86,11 +98,11 @@ object objAkinator {
                         val ab = if (it.next() == "o") abO else abN;
       
                         println("Pensez-vous à : " + ab)
-                        
-                        if(it.next() == "o"){
+                        val rep = it.next()
+                        if(rep == "o"){
                           println("J'ai gagné !")
                           a
-                        } else{
+                        } else if(rep == "n"){
                           println("J'ai perdu ! Quelle est la bonne réponse ? ")
                           val res = it.next();
                           println("Quelle question permet de différencier " + res + " de " + ab +" ?")
@@ -111,19 +123,22 @@ object objAkinator {
                               Question(s, Question(q, Animal(ab.toString()), Animal(res)), Animal(abN))
                             
                           }
+                        }else{
+                          throw new Exception("Réponse non valide")
                         }
                       }
     
     case Question(s, Animal(abO), question) => {
                         
                         println(s)
-                        if (it.next() == "o"){
+                        val rep = it.next()
+                        if (rep == "o"){
                           println("Pensez-vous à : " + abO)
-                        
-                          if(it.next() == "o"){
+                          val rep2 = it.next()
+                          if(rep2 == "o"){
                             println("J'ai gagné !")
                             a
-                          } else{
+                          } else if(rep2 == "n"){
                             println("J'ai perdu ! Quelle est la bonne réponse ? ")
                             val res = it.next();
                             println("Quelle question permet de différencier " + res + " de " + abO +" ?")
@@ -136,10 +151,14 @@ object objAkinator {
                             else
                               Question(s, Question(q, Animal(abO.toString()), Animal(res)), question )
                             
+                          }else{
+                            throw new Exception("Reponse non valide")
                           }
 
-                        } else{
+                        } else if(rep == "n"){
                           Question(s, Animal(abO), jeuApprentissage(question, it))
+                        }else{
+                          throw new Exception("Reponse non valide")
                         }
                         
                       }
@@ -147,13 +166,14 @@ object objAkinator {
     case Question(s, question, Animal(abN)) => {
                         
                         println(s)
-                        if (it.next() == "n"){
+                        val rep = it.next()
+                        if (rep == "n"){
                           println("Pensez-vous à : " + abN)
-                        
-                          if(it.next() == "o"){
+                          val rep2 = it.next()
+                          if(rep2 == "o"){
                             println("J'ai gagné !")
                             a
-                          } else{
+                          } else if(rep2 == "n"){
                             println("J'ai perdu ! Quelle est la bonne réponse ? ")
                             val res = it.next();
                             println("Quelle question permet de différencier " + res + " de " + abN +" ?")
@@ -163,23 +183,30 @@ object objAkinator {
                             
                             if(repQ == "o")
                               Question(s,question, Question(q, Animal(res), Animal(abN.toString())) )
-                            else
+                            else if(repQ == "n")
                               Question(s, question, Question(q, Animal(abN.toString()), Animal(res)))
-                            
+                            else
+                              throw new Exception("Réponse non valide")
+                          }else{
+                            throw new Exception("Réponse non valide")
                           }
 
-                        } else{
+                        } else if (rep == "n"){
                           Question(s, jeuApprentissage(question, it), Animal(abN))
+                        } else{
+                          throw new Exception("Réponse non valide")
                         }
-                        
                       }
     
     case Question(s, o, n) => {
                                 println(s)
-                                if(it.next() == "o"){
+                                val rep = it.next()
+                                if(rep == "o"){
                                   Question(s, jeuApprentissage(o, it), n)
-                                } else{
+                                } else if(rep == "n"){
                                   Question(s, o, jeuApprentissage(n, it))
+                                } else{
+                                  throw new Exception("Réponse non valide")
                                 }
                               }
   }
@@ -238,26 +265,31 @@ object objAkinator {
     			jeuSimpleJNSP(o,it,arbresRestant)
     		} else if(rep == "n"){
     			jeuSimpleJNSP(n,it,arbresRestant)
-    		} else{
+    		} else if(rep == "x"){
     		  val resO = jeuSimpleJNSP(o,it,n::arbresRestant)
           if(!resO)
             jeuSimpleJNSP(n,it,arbresRestant)
           else
             true	
+    		}else{
+    		  throw new Exception("Réponse non valide")
     		}
     	}
     	case Animal(ab) => {
     		println("Pensez-vous à : " + ab)
-    		if(it.next() == "o"){
+    		val rep = it.next()
+    		if(rep == "o"){
     			println("J’ai gagné !")
     			true
-    		}else{
+    		}else if(rep == "n"){
     			if(arbresRestant == Nil){
     				println("J’ai perdu !")
     				false
     			}else{
     				false
     		}
+       }else{
+         throw new Exception("Réponse non valide")
        }
     	}
     }
@@ -269,15 +301,16 @@ object objAkinator {
   
   def interfaceTextuelle() : Unit = {
     
-    
-    val ab = fichierToABanimal("default.txt")
-    
+    val ab = fichierToABanimal("default1.txt")
     
     println("Choisissez parmi les modes suivants :")
-    println("Tapez 1 pour le mode Simple.")
-    println("Tapez 2 pour le mode Apprentissage.")
-    println("Tapez 3 si vous ne savez pas.")
-    println("Tapez 4 pour le mode Log ( si vous savez ce que c'est (en vrai il sert à rien)).")
+    println("- Tapez 1 pour le mode Simple.")
+    println("- Tapez 2 pour le mode Apprentissage.")
+    println("   Si Akinator ne connait pas encore votre animal, vous pouvez l'ajouter afin qu'il le retrouve la prochaine fois.")
+    println("- Tapez 3 pour le mode SimpleJeNeSaisPas.")
+    println("   Si vous ne connaissez pas la réponse à une question, vous pouvez tapez x pour passer la question")
+    println("- Tapez 4 pour le mode Log.")
+    println("   Ce mode fait apparaitre la liste de vos réponses à la fin de la partie.")
     
     val rep = Source.stdin.getLines.next
     
@@ -290,6 +323,7 @@ object objAkinator {
       }
       case "3"  => jeuSimpleJNSP(ab,Source.stdin.getLines,Nil)
       case "4"  => println(jeuLog(ab,Source.stdin.getLines))
+      case _ => jeuSimple(ab,Source.stdin.getLines)
     }
     
     println("Voulez-vous rejouer ? ")
@@ -306,9 +340,17 @@ object objAkinator {
     //ABanimalToFichier("test.txt", a)
     //println(fichierToABanimal("default.txt"))
     println("Bienvenue sur Akinator des animaux !")
-
-    interfaceTextuelle()
-
+    println()
+    println("Pour répondre aux différentes questions :")
+    println("   - Tapez o pour répondre oui")
+    println("   - Tapez n pour répondre non")
+    println()
+    
+    try{
+      interfaceTextuelle()
+    }catch{
+      case e : Exception => println("Exception : " + e);
+    }
     //jeuSimpleJNSP(a, Source.stdin.getLines,Nil)
 
 
