@@ -88,7 +88,9 @@ class TestCorrigeuxGauchotte extends FunSuite{
     assert(fichierToABanimal("test_enregistrement.txt") == testMilieuN)
   }
   
-  test("Jeu JSP"){
-    assert(true);
+  test("Jeu JNSP"){
+    assert(jeuSimpleJNSP(a,Iterator("o","o","x","n","o"))==true);
+    
+    assert(jeuSimpleJNSP(a,Iterator("x","n","n","n","n","o"))==true);
   }
 }

@@ -115,7 +115,6 @@ object objAkinator {
                               Question(s, Animal(abO), Question(q, Animal(res), Animal(ab.toString())))
                             else
                               Question(s, Animal(abO), Question(q, Animal(ab.toString()), Animal(res)))
-                            
                           } else{
                             if(repQ == "o")
                               Question(s, Question(q, Animal(res), Animal(ab.toString())), Animal(abN))
@@ -257,18 +256,19 @@ object objAkinator {
   /* Question 7 */
   
 
-    def jeuSimpleJNSP(a:ABanimal, it:Iterator[String],arbresRestant : List[ABanimal]) : Boolean = a match{
-    	case Question(s,o,n) => {
+    def jeuSimpleJNSP(a:ABanimal, it:Iterator[String]) : Boolean = {
+      def aux(arbre : ABanimal, arbresRestant : List[ABanimal]) : Boolean = arbre match{
+    	  case Question(s,o,n) => {
     		println(s)
     		val rep = it.next()
     		if(rep == "o"){
-    			jeuSimpleJNSP(o,it,arbresRestant)
+    			aux(o,arbresRestant)
     		} else if(rep == "n"){
-    			jeuSimpleJNSP(n,it,arbresRestant)
+    			aux(n,arbresRestant)
     		} else if(rep == "x"){
-    		  val resO = jeuSimpleJNSP(o,it,n::arbresRestant)
+    		  val resO = aux(o,n::arbresRestant)
           if(!resO)
-            jeuSimpleJNSP(n,it,arbresRestant)
+            aux(n,arbresRestant)
           else
             true	
     		}else{
@@ -287,11 +287,13 @@ object objAkinator {
     				false
     			}else{
     				false
-    		}
-       }else{
+    		  }
+         }else{
          throw new Exception("Réponse non valide")
-       }
-    	}
+         }
+    	  }
+      }
+      aux(a,Nil)
     }
 
   
@@ -300,6 +302,7 @@ object objAkinator {
   /* Question 8 */
   
   def interfaceTextuelle() : Unit = {
+    
     
     val ab = fichierToABanimal("default.txt")
     
@@ -327,7 +330,7 @@ object objAkinator {
       }
       case "3"  => {
         println("Vous jouez en mode SimpleJeNeSaisPas.")
-        jeuSimpleJNSP(ab,Source.stdin.getLines,Nil)
+        jeuSimpleJNSP(ab,Source.stdin.getLines)
       }
       case "4"  => {
         println("Vous jouez en mode SimpleJeNeSaisPas.")
@@ -347,7 +350,7 @@ object objAkinator {
   
   
   def main(args: Array[String]){
-    
+    jeuSimpleJNSP(a,Source.stdin.getLines)/*
     println("Bienvenue sur Akinator des animaux !")
     println
     println("Pour répondre aux différentes questions :")
@@ -361,7 +364,7 @@ object objAkinator {
       case e : Exception => println("Erreur : " + e.getMessage);
     }
 
-
+*/
   }
   
   
